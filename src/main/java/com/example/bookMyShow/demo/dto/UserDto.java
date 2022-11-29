@@ -3,6 +3,8 @@ package com.example.bookMyShow.demo.dto;
 import com.sun.istack.NotNull;
 import lombok.*;
 
+import java.util.List;
+
 @Getter
 @Setter
 @Builder
@@ -16,4 +18,8 @@ public class UserDto {
     String name;
 
     String mobileNo;
+
+    List<TicketDto> ticketDtoList;
+
+
 }
