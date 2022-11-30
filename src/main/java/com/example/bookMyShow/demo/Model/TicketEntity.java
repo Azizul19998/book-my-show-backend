@@ -27,7 +27,7 @@ public class TicketEntity {
     private String allotedSeats;
 
     @Column(name = "amount", nullable = false)
-    private int amount;
+    private double amount;
 
     @CreatedDate
     @Temporal(TemporalType.TIMESTAMP)
