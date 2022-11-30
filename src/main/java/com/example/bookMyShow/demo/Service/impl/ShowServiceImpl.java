@@ -7,12 +7,17 @@ import com.example.bookMyShow.demo.Repository.ShowRepository;
 import com.example.bookMyShow.demo.Repository.ShowSeatsRepository;
 import com.example.bookMyShow.demo.Repository.TheatreRepository;
 import com.example.bookMyShow.demo.Service.ShowService;
-import com.example.bookMyShow.demo.dto.ShowDto;
+import com.example.bookMyShow.demo.dto.EntryDto.ShowEntryDto;
+import com.example.bookMyShow.demo.dto.ResponseDto.ShowResponseDto;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
+@Slf4j
 public class ShowServiceImpl implements ShowService {
 
     @Autowired
@@ -25,27 +30,31 @@ public class ShowServiceImpl implements ShowService {
     ShowRepository showRepository;
 
     @Override
-    public ShowDto addShow(ShowDto showDto) {
+    public ShowResponseDto addShow(ShowEntryDto showEntryDto) {
         //we have made the partial Show Entity Object
         // The goal is , we have to set the movie entity and theatre entity in this.. not the dto's
-        ShowEntity showEntity = ShowConverter.convertDtoToEntity((showDto));
+        ShowEntity showEntity = ShowConverter.convertDtoToEntity((showEntryDto));
 
         // add MovieEntity to showEntity object
-        MovieEntity movieEntity = movieRepository.findById(showDto.getMovieDto().getId()).get();
+        MovieEntity movieEntity = movieRepository.findById(showEntryDto.getMovieResponseDto().getId()).get();
 
 
         TheatreEntity theatreEntity =  theatreRepository
-                .findById(showDto.getTheatreDto().getId()).get();
+                .findById(showEntryDto.getTheatreResponseDto().getId()).get();
 
         showEntity.setMovie(movieEntity);
         showEntity.setTheatre(theatreEntity);
 
-        // we need to pass the list of the theatre seata
+        // we need to pass the list of the theatre seats
         generateShowEntitySeats(theatreEntity.getSeats(), showEntity);
 
         showEntity = showRepository.save(showEntity);
 
-        return showDto;
+        //We need to create Response Show Dto
+        ShowResponseDto showResponseDto = ShowConverter.convertEntityToDto(showEntity, showEntryDto);
+
+
+        return showResponseDto;
     }
 
     private void generateShowEntitySeats(List<TheatreSeatEntity> theatreSeatEntityList, ShowEntity showEntity) {

@@ -1,9 +1,11 @@
 package com.example.bookMyShow.demo.Service;
 
-import com.example.bookMyShow.demo.dto.TheatreDto;
+import com.example.bookMyShow.demo.dto.EntryDto.TheatreEntryDto;
+import com.example.bookMyShow.demo.dto.ResponseDto.TheatreResponseDto;
+//import com.example.bookMyShow.demo.dto.TheatreDto;
 
 public interface TheatreService {
-    TheatreDto addTheatre(TheatreDto theatreDto);
+    TheatreResponseDto addTheatre(TheatreEntryDto theatreEntryDto);
 
-    TheatreDto getTheatre(int id);
+    TheatreResponseDto getTheatre(int id);
 }

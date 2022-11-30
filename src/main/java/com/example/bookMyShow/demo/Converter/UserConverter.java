@@ -1,26 +1,28 @@
 package com.example.bookMyShow.demo.Converter;
 
 import com.example.bookMyShow.demo.Model.UserEntity;
-import com.example.bookMyShow.demo.dto.UserDto;
+import com.example.bookMyShow.demo.dto.EntryDto.UserEntryDto;
+import com.example.bookMyShow.demo.dto.ResponseDto.UserResponseDto;
+//import com.example.bookMyShow.demo.dto.UserDto;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass
 
 public class UserConverter {
-    public static UserEntity convertDtoToEntity(UserDto userDto)
+    public static UserEntity convertDtoToEntity(UserEntryDto userEntryDto)
     {
         //i need to create user object
         return UserEntity.builder()
-                .name(userDto.getName())
-                .mobile(userDto.getMobileNo())
+                .name(userEntryDto.getName())
+                .mobile(userEntryDto.getMobile())
                 .build();
     }
-    public static UserDto convertEntityToDto(UserEntity userEntity)
+    public static UserResponseDto convertEntityToDto(UserEntity userEntity)
     {
-        return UserDto.builder()
+        return UserResponseDto.builder()
                 .id(userEntity.getId())
                 .name(userEntity.getName())
-                .mobileNo(userEntity.getMobile())
+                .mobile(userEntity.getMobile())
                 .build();
 
     }

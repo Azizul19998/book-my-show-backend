@@ -10,8 +10,10 @@ import com.example.bookMyShow.demo.Repository.TicketRepository;
 import com.example.bookMyShow.demo.Repository.UserRepository;
 import com.example.bookMyShow.demo.Service.TicketService;
 import com.example.bookMyShow.demo.dto.BookTicketRequestDto;
+//import com.example.bookMyShow.demo.dto.ResponseDto.TicketResponseDto;
 import com.example.bookMyShow.demo.dto.TicketDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -20,6 +22,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@Service
 public class TicketServiceImpl implements TicketService {
     @Autowired
     UserRepository userRepository;
@@ -33,6 +36,7 @@ public class TicketServiceImpl implements TicketService {
     public TicketDto bookTicket(BookTicketRequestDto bookTicketRequestDto) {
          UserEntity userEntity  = userRepository.
                  findById(bookTicketRequestDto.getId()).get();
+
         ShowEntity showEntity = showRepository
                 .findById(bookTicketRequestDto.getShowId()).get();
 
@@ -75,17 +79,24 @@ public class TicketServiceImpl implements TicketService {
         showSeatsEntity.setBooked(true);
         showSeatsEntity.setBookedAt(new Date());
         showSeatsEntity.setTicket(ticketEntity);
+
         amount += showSeatsEntity.getRate();
     }
+
+    ticketEntity.setBookedAt(new Date());
     ticketEntity.setAllotedSeats(String.valueOf(bookedSeats));
     ticketEntity.setAmount(amount);
 
 
-    //connect the Show and in the..
+    //connecting the Show and user..
         // Show.Entity.setTicket
+        showEntity.getTickets().add(ticketEntity);
+
         //UserEntity.setTicket
+        userEntity.getTicketEntities().add(ticketEntity);
 
     ticketEntity = ticketRepository.save(ticketEntity);
+
     return TicketConverter.convertEntityToDto(ticketEntity);
 
 

@@ -1,9 +1,11 @@
 package com.example.bookMyShow.demo.Service;
 
-import com.example.bookMyShow.demo.dto.UserDto;
+import com.example.bookMyShow.demo.dto.EntryDto.UserEntryDto;
+import com.example.bookMyShow.demo.dto.ResponseDto.UserResponseDto;
+
 
 public interface UserService {
-    void addUser(UserDto userDto);
+    void addUser(UserEntryDto userEntryDto);
 
-    UserDto getUser(int id);
+    UserResponseDto getUser(int id);
 }

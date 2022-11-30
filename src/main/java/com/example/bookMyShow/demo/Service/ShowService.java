@@ -1,9 +1,9 @@
 package com.example.bookMyShow.demo.Service;
 
-import com.example.bookMyShow.demo.dto.ShowDto;
-import org.springframework.stereotype.Repository;
+import com.example.bookMyShow.demo.dto.EntryDto.ShowEntryDto;
+import com.example.bookMyShow.demo.dto.ResponseDto.ShowResponseDto;
 
-@Repository
+
 public interface ShowService {
-    ShowDto addShow(ShowDto showDto);
+    ShowResponseDto addShow(ShowEntryDto showEntryDto);
 }
