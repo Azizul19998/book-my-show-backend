@@ -10,15 +10,16 @@ import java.time.LocalTime;
 @Data
 @Builder
 public class ShowResponseDto {
+
     int id;
 
     LocalDate showDate;
 
     LocalTime showTime;
 
-    @NotNull
+
     MovieResponseDto movieResponseDto;
 
-    @NotNull
+
     TheatreResponseDto theatreResponseDto;
 }

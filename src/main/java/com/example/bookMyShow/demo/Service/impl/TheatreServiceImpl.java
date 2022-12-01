@@ -36,6 +36,8 @@ public class TheatreServiceImpl implements TheatreService {
          List<TheatreSeatEntity> seats=
                 createTheatreSeats();
 
+         theatreEntity.setSeats(seats);
+
          theatreEntity.setShows(null);
          //I need to set the theatreId for all these seats
 
@@ -89,5 +91,10 @@ public class TheatreServiceImpl implements TheatreService {
 
         TheatreResponseDto theatreResponseDto = TheatreConverter.convertEntityToDto(theatreEntity);
         return theatreResponseDto;
+    }
+
+    @Override
+    public TheatreEntity getTheatreEntity(int id) {
+        return theatreRepository.findById(id).get();
     }
 }

@@ -1,5 +1,6 @@
 package com.example.bookMyShow.demo.dto.ResponseDto;
 
+import com.sun.istack.NotNull;
 import lombok.Builder;
 import lombok.Data;
 
@@ -9,6 +10,8 @@ import java.util.List;
 @Data
 @Builder
 public class MovieResponseDto {
+
+    @NotNull
     int id;
     String name;
     LocalDate releaseDate;

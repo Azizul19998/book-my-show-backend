@@ -23,8 +23,8 @@ public class MovieController {
         return new ResponseEntity<>(movieService.addMovie(movieEntryDto), HttpStatus.CREATED);
     }
 
-//    @GetMapping("/get/{id}")
-//    public MovieResponseDto getMovie(int id) {
-//        return movieService.getMovie(id);
-//    }
+    @GetMapping("/get/{id}")
+    public MovieResponseDto getMovie(@PathVariable Integer id) {
+        return movieService.getMovie(id);
+    }
 }

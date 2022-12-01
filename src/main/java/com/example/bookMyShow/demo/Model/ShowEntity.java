@@ -3,6 +3,9 @@ package com.example.bookMyShow.demo.Model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -31,11 +34,13 @@ public class ShowEntity {
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
+    @CreatedDate
     @Column(name = "created_at")
     private Date createdAt;
 
-    @CreationTimestamp
+    @UpdateTimestamp
     @Temporal(TemporalType.TIMESTAMP)
+    @LastModifiedBy
     @Column(name = "updated_at")
     private Date updatedAt;
 
@@ -50,6 +55,8 @@ public class ShowEntity {
     @ManyToOne
     @JsonIgnore
     private TheatreEntity theatre;
+
+
 
     @OneToMany(mappedBy = "show", cascade = CascadeType.ALL)
     @JsonIgnore

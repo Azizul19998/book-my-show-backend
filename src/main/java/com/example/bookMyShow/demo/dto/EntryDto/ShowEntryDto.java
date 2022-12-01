@@ -22,9 +22,9 @@ public class ShowEntryDto {
     @NotNull
     LocalTime showTime;
 
-    @NotNull
+  @NotNull
     MovieResponseDto movieResponseDto;
 
-    @NotNull
+  @NotNull
     TheatreResponseDto theatreResponseDto;
 }

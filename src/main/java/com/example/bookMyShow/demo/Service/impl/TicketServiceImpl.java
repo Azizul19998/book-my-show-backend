@@ -11,6 +11,7 @@ import com.example.bookMyShow.demo.Repository.UserRepository;
 import com.example.bookMyShow.demo.Service.TicketService;
 import com.example.bookMyShow.demo.dto.BookTicketRequestDto;
 //import com.example.bookMyShow.demo.dto.ResponseDto.TicketResponseDto;
+import com.example.bookMyShow.demo.dto.ResponseDto.TicketResponseDto;
 import com.example.bookMyShow.demo.dto.TicketDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,7 +34,7 @@ public class TicketServiceImpl implements TicketService {
 
 
     @Override
-    public TicketDto bookTicket(BookTicketRequestDto bookTicketRequestDto) {
+    public TicketResponseDto bookTicket(BookTicketRequestDto bookTicketRequestDto) {
          UserEntity userEntity  = userRepository.
                  findById(bookTicketRequestDto.getId()).get();
 
@@ -99,11 +100,25 @@ public class TicketServiceImpl implements TicketService {
 
     return TicketConverter.convertEntityToDto(ticketEntity);
 
+    }
 
+    public String convertListOfSeatsEntityToString(List<ShowSeatsEntity> bookedSeats)
+    {
+        String str= "";
+        for(ShowSeatsEntity showSeatsEntity : bookedSeats) {
+            str = str + showSeatsEntity.getSeatNumber()+" ";
+        }
+        return str;
     }
 
     @Override
-    public TicketDto getTicket(int id) {
-        return null;
+    public TicketResponseDto getTicket(int id) {
+        TicketEntity ticketEntity = ticketRepository.findById(id).get();
+
+        TicketResponseDto ticketResponseDto = TicketConverter.convertEntityToDto(ticketEntity);
+
+        return ticketResponseDto;
     }
+
+
 }
