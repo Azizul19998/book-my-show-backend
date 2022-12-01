@@ -9,5 +9,7 @@ public interface TheatreService {
     TheatreResponseDto addTheatre(TheatreEntryDto theatreEntryDto);
 
     TheatreResponseDto getTheatre(int id);
+
+
     TheatreEntity getTheatreEntity(int id);
 }

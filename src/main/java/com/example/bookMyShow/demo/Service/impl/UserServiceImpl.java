@@ -45,4 +45,10 @@ public class UserServiceImpl implements UserService {
         UserResponseDto userResponseDto = UserConverter.convertEntityToDto(userEntity);
         return userResponseDto;
     }
+
+    @Override
+    public  UserEntity getUserEntity (int id)
+    {
+        return userRepository.findById(id).orElse(null);
+    }
 }

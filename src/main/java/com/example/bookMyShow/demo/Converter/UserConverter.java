@@ -23,6 +23,7 @@ public class UserConverter {
                 .id(userEntity.getId())
                 .name(userEntity.getName())
                 .mobile(userEntity.getMobile())
+                .tickets(userEntity.getTicketEntities())
                 .build();
 
     }

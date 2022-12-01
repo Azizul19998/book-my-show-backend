@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 public interface MovieRepository extends JpaRepository<MovieEntity,Integer> {
     //boolean getMovieEntityByName(String name);
 
+
 }

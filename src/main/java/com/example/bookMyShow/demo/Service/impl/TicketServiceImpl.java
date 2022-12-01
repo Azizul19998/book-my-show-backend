@@ -36,12 +36,12 @@ public class TicketServiceImpl implements TicketService {
     @Override
     public TicketResponseDto bookTicket(BookTicketRequestDto bookTicketRequestDto) {
          UserEntity userEntity  = userRepository.
-                 findById(bookTicketRequestDto.getId()).get();
+                 findById(bookTicketRequestDto.getId()).orElse(null);
 
         ShowEntity showEntity = showRepository
-                .findById(bookTicketRequestDto.getShowId()).get();
+                .findById(bookTicketRequestDto.getShowId()).orElse(null);
 
-        Set<String> requestedSeats = bookTicketRequestDto
+        Set<String> requestSeats = bookTicketRequestDto
                 .getRequestedSeats();
 
         List<ShowSeatsEntity> showSeatsEntityList =
@@ -52,7 +52,7 @@ public class TicketServiceImpl implements TicketService {
                 .stream()
                 .filter(seat -> seat.getSeatType().equals(bookTicketRequestDto.getSeatType())
                 && !seat.isBooked()
-                && requestedSeats.contains(seat.getSeatNumber()))
+                && requestSeats.contains(seat.getSeatNumber()))
                 .collect(Collectors.toList());
 
         // Option 2
@@ -65,7 +65,7 @@ public class TicketServiceImpl implements TicketService {
 //            }
 //        }
 
-        if(bookedSeats.size() != requestedSeats.size()) {
+        if(bookedSeats.size() != requestSeats.size()) {
             throw new Error("All seats are not available");
         }
 
@@ -85,7 +85,7 @@ public class TicketServiceImpl implements TicketService {
     }
 
     ticketEntity.setBookedAt(new Date());
-    ticketEntity.setAllotedSeats(String.valueOf(bookedSeats));
+    ticketEntity.setAllotedSeats(convertListOfSeatsEntityToString(bookedSeats));
     ticketEntity.setAmount(amount);
 
 

@@ -7,6 +7,7 @@ import com.example.bookMyShow.demo.dto.ResponseDto.MovieResponseDto;
 
 public class MovieConverter {
     public static MovieEntity convertDtoToEntity(MovieEntryDto movieEntryDto) {
+
         return MovieEntity.builder()
                 .name(movieEntryDto.getName())
                 .releaseDate(movieEntryDto.getReleaseDate())

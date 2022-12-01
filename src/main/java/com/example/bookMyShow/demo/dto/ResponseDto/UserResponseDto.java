@@ -1,5 +1,6 @@
 package com.example.bookMyShow.demo.dto.ResponseDto;
 
+import com.example.bookMyShow.demo.Model.TicketEntity;
 import com.example.bookMyShow.demo.dto.TicketDto;
 import lombok.Builder;
 import lombok.Data;
@@ -14,5 +15,5 @@ public class UserResponseDto {
     String mobile;
 
     //optional
-    List<TicketDto> tickets;
+    List<TicketEntity> tickets;
 }

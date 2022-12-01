@@ -1,5 +1,6 @@
 package com.example.bookMyShow.demo.Controller;
 
+import com.example.bookMyShow.demo.Model.UserEntity;
 import com.example.bookMyShow.demo.Service.impl.UserServiceImpl;
 import com.example.bookMyShow.demo.dto.EntryDto.UserEntryDto;
 import com.example.bookMyShow.demo.dto.ResponseDto.UserResponseDto;
@@ -32,5 +33,11 @@ public class UserController {
         return  new ResponseEntity<>(userResponseDto,HttpStatus.OK);
 
     }
+
+//
+//    @GetMapping("/get/{id}")
+//    public UserEntity getUserEntity(@PathVariable Integer id) {
+//        return userService.getUserEntity(id);
+//    }
 
 }
